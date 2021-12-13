@@ -125,10 +125,3 @@ a, p, h1, h2, h3{
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
 }
-
-.slider2{
-  display: flex;
-  width: 660px;
-  height: 420px;
-  overflow: hidden;
-}

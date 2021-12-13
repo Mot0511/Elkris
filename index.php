@@ -51,17 +51,7 @@ width: 10px;
     background-image: url(img/close.png);
     border: 0px;
   }
-  .pph_ph{
-    margin-left: 0px;
-    transition: margin-left 0.5s;
-  }
-  .list_pph{
-    width: 350px;
-    height: 400px;
-    background-color: lightgrey;
-    margin-left: 25px;
-    padding: 10px;
-  }
+
   .place{
     width: 100%;
     height: 100px;
@@ -199,6 +189,56 @@ width: 10px;
   margin-left: 150px;
   margin-top: 50px;
 }
+.list_pph a{
+  text-decoration: none;
+}
+.pph_ph{
+  margin-left: 0px;
+  transition: margin-left 0.5s;
+}
+.list_pph{
+  width: 350px;
+  height: 420px;
+  background-color: lightgrey;
+  margin-left: 25px;
+  display: inline-block;
+  padding: 10px;
+}
+.slider2{
+  display: flex;
+  width: 660px;
+  height: 420px;
+  overflow: hidden;
+}
+@media (max-width: 1200px) {
+  .heading{
+    font-size: 80px;
+    margin-left: -60px;
+    width: 100%;
+    margin-top: 100px
+  }
+  .i{
+    font-size: 50px;
+    margin-left: -60px;
+    margin-top: 80px;
+  }
+  .carousel{
+    width: 115%;
+    margin-left: 60px;
+  }
+  .adv{
+    width: 100%;
+  }
+  .adv_h{
+    margin-left: auto;
+  }
+  .pph h1{
+    font-size: 80px;
+  }
+  .pph p{
+    font-size: 40px;
+  }
+}
   </style>
   </head>
   <body>
@@ -215,19 +255,15 @@ width: 10px;
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img class="d-block w-100" src="img/places/ph21.jpg" alt="">
-          <h1>Зимний этап Всероссийской акции <br>«Безопасность детства»</h1>
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="img/places/ph22.jpg" alt="">
-          <h1>Всемирный день памяти <br>жертв ДТП</h1>
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="img/places/ph23.jpg" alt="">
-          <h1>Всемирный день памяти <br>жертв ДТП</h1>
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="img/places/ph24.jpg" alt="">
-          <h1>Всемирный день памяти <br>жертв ДТП</h1>
         </div>
       </div>
       <a class="carousel-control-prev" role="button" href="#carouselControls" data-bs-slide="prev">
@@ -254,22 +290,22 @@ width: 10px;
 
 
 <br>
-<h1 class="heading">Наши преимущества</h1>
-<div class="row advs">
-  <div class="col-md-4 adv">
-    <h2>Приемущство1</h2>
-  </div>
-  <div class="col-md-4 adv">
-    <h2>Приемущство2</h2>
-  </div>
-  <div class="col-md-4 adv">
-    <h2>Приемущство3</h2>
-  </div>
-  <div class="col-md-4 adv">
-    <h2>Приемущство4</h2>
-  </div>
+  <h1 class="heading adv_h">Наши преимущества</h1>
+  <div class="row advs">
+    <div class="col-md-4 adv">
+      <h2>Приемущство1</h2>
+    </div>
+    <div class="col-md-4 adv">
+      <h2>Приемущство2</h2>
+    </div>
+    <div class="col-md-4 adv">
+      <h2>Приемущство3</h2>
+    </div>
+    <div class="col-md-4 adv">
+      <h2>Приемущство4</h2>
+    </div>
 
-</div>
+  </div>
 
 
 <div class="pph">

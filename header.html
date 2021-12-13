@@ -22,29 +22,77 @@
       color: black;
       background-color: white;
     }
+    .header{
+      height: 100px;
+      overflow: hidden;
+
+      transition: height 0.5s;
+    }
+    .menu_ap{
+      padding-top: 50px;
+      display: none;
+    }
+    .menu_ap a{
+      padding-left: 50px;
+      color: #575655;
+      text-decoration: none;
+      font-size: 50px;
+    }
+    .menu_ap a:hover{
+      color: #0066db;
+    }
+    .order_bt2{
+      width: 180px;
+      height: 48px;
+      background-color: #1071ff;
+      border: 1px solid #1071ff;
+      color: white;
+      font-size: 18px;
+      float: right;
+      margin-right: -390px;
+      margin-top: -35px;
+      display: none;
+
+      transition: color 0.5s;
+      transition: background-color 0.5s;
+    }
+    .gamburger{
+      background-image: url(img/gamburger.png);
+      display: none;
+      width: 100px;
+      height: 100px;
+      float: right;
+      margin-top: 10px;
+      margin-right: 10px;
+      background-color: white;
+      border: 0;
+
+      transition: height 0.5s;
+    }
+    @media (max-width: 1200px) {
+      .menu, .header h2, .order_bt{
+        display: none;
+      }
+      .header img{
+        width: 300px;
+        height: auto;
+      }
+      .menu_ap{
+        display: block;
+      }
+      .gamburger{
+        display: inline-block;
+      }
+      .order_bt2{
+        display: block;
+      }
+    }
     </style>
   </head>
   <body>
-    <div class="order" id="order">
-      <h1>Форма связи</h1>
-      <button type="button" onclick="hide_form()" class="close" name="button"></button>
-      <div style="display: flex;">
-        <form class="" action="form.php" method="post">
-          <input type="text" class="input" name="name" placeholder="Имя" required><br><br>
-          <input type="tel" class="input" name="tel" placeholder="Телефон" required><br><br>
-          <textarea name="des" class="textarea" placeholder="Описание проекта" rows="8" cols="80" required></textarea><br><br>
-          <input type="submit" class="send_bt" name="" value="Отправить"><br>
-        </form>
 
-        <p style="padding-left: 50px;">
-          Заполните <b>форму</b> обратной связи<br><br><br>
-          Позвоните нам по телефону <b>45-45-24</b><br><br><br>
-          Напишите письмо <b>454524@inbox.ru</b>
-        </p>
-      </div>
-    </div>
-    <div class="header">
-      <a href="/"><img src="img/heading.png" width="150px" height="40px" alt=""></a>
+    <div class="header" id="header" style="height: 100px;">
+      <a href="index.php"><img src="img/heading.png" width="150px" height="40px" alt=""></a>
       <div class="menu">
         <a href="flats.php">Электромонтаж квартир</a>
         <a href="houses.php">Электромонтаж домов</a>
@@ -53,6 +101,14 @@
       </div>
       <h2>Тел. 45-45-24</h2>
       <button type="button" class="order_bt" data-bs-toggle="modal" data-bs-target="#exampleModal" name="button">Оставить заявку</button>
+      <button type="button" class="gamburger" onclick="menu()" name="button"></button>
+      <div class="menu_ap">
+        <a href="flats.php">Электромонтаж квартир</a><br>
+        <a href="houses.php">Электромонтаж домов</a><br>
+        <a href="rooms.php">Электромонтаж помещений</a><br>
+        <a href="about.php">О нас</a><br>
+      </div>
+      <button type="button" class="order_bt2" data-bs-toggle="modal" data-bs-target="#exampleModal" name="button">Оставить заявку</button>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -86,6 +142,15 @@
       </div>
     </div>
 <script type="text/javascript">
+  var header = document.getElementById('header')
+  function menu() {
+    if (header.style.height == '100px'){
+      header.style = 'height: 450px;'
+    }
+    else{
+      header.style = 'height: 100px;'
+    }
+  }
   function show_form() {
     document.getElementById('order').style = 'display: block;'
 
