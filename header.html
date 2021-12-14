@@ -42,15 +42,14 @@
       color: #0066db;
     }
     .order_bt2{
-      width: 180px;
-      height: 48px;
+      width: 100%;
+      height: 80px;
       background-color: #1071ff;
       border: 1px solid #1071ff;
       color: white;
-      font-size: 18px;
-      float: right;
-      margin-right: -390px;
-      margin-top: -35px;
+      font-size: 40px;
+      margin-top: 30px;
+      margin-left: 50px;
       display: none;
 
       transition: color 0.5s;
@@ -108,7 +107,7 @@
         <a href="rooms.php">Электромонтаж помещений</a><br>
         <a href="about.php">О нас</a><br>
       </div>
-      <button type="button" class="order_bt2" data-bs-toggle="modal" data-bs-target="#exampleModal" name="button">Оставить заявку</button>
+     <a href="#form2"><button type="button" class="order_bt2" data-bs-toggle="modal"  name="button">Оставить заявку</button></a>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -145,7 +144,7 @@
   var header = document.getElementById('header')
   function menu() {
     if (header.style.height == '100px'){
-      header.style = 'height: 450px;'
+      header.style = 'height: 600px;'
     }
     else{
       header.style = 'height: 100px;'

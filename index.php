@@ -83,7 +83,7 @@ width: 10px;
   }
   .adv2{
     margin-left: 150px;
-
+    margin-top: 50px;
   }
   .adv22{
     width: 500px;
@@ -92,7 +92,7 @@ width: 10px;
   }
   .form2{
     width: 1100px;
-    margin-left: 150px;
+    margin-left: 0px;
     height: 400px;
     margin-top: 50px;
     background: #F3F2F0;
@@ -176,7 +176,7 @@ width: 10px;
 }
 .adv{
   background: lightgrey;
-  width: 450px;
+
   height: 500px;
   margin-left: 20px;
   margin-top: 20px;
@@ -198,11 +198,12 @@ width: 10px;
 }
 .list_pph{
   width: 350px;
-  height: 420px;
+  height: 560px;
   background-color: lightgrey;
   margin-left: 25px;
-  display: inline-block;
   padding: 10px;
+  margin-left: 1130px;
+  margin-top: -600px;
 }
 .slider2{
   display: flex;
@@ -210,33 +211,93 @@ width: 10px;
   height: 420px;
   overflow: hidden;
 }
+.pph1{
+  width: 960px;
+  height: 720px;
+  margin-left: 150px;
+}
 @media (max-width: 1200px) {
   .heading{
     font-size: 80px;
-    margin-left: -60px;
+    margin-left: -120px;
     width: 100%;
     margin-top: 100px
   }
   .i{
     font-size: 50px;
-    margin-left: -60px;
+    margin-left: -120px;
     margin-top: 80px;
   }
   .carousel{
-    width: 115%;
-    margin-left: 60px;
-  }
-  .adv{
     width: 100%;
+    margin-left: 2%;
+  }
+  /* .adv{
+    width: 100%;
+    margin-left: -5%;
+  } */
+  .advs{
+    margin-left: 0;
   }
   .adv_h{
-    margin-left: auto;
+    margin-left: 5%;
   }
   .pph h1{
     font-size: 80px;
   }
   .pph p{
     font-size: 40px;
+  }
+  .list_pph{
+    margin-top: 50px;
+    margin-left: 25px;
+    width: 100%;
+  }
+  .pph1{
+    width: 100%;
+  }
+  .place{
+    margin-top: 80px;
+  }
+  .noTop{
+    margin-top: 0px;
+  }
+  .place img{
+    width: 310px;
+    height: 170px;
+  }
+  .place p{
+    font-size: 30px;
+  }
+  body{
+    width: 130%;
+  }
+  .form2{
+    width: 100%;
+    height: 650px;
+    margin-left: -140px;
+  }
+  .adv2 h1{
+    font-size: 80px;
+    margin-top: 50px;
+  }
+  .adv2 h2{
+    font-size: 60px;
+  }
+  .adv2 p{
+    font-size: 40px;
+  }
+  .input{
+    width: 90%;
+    height: 80px;
+  }
+  .input::placeholder{
+    font-size: 30px;
+  }
+  .send_bt{
+    width: 90%;
+    font-size: 30px;
+    height: 80px;
   }
 }
   </style>
@@ -291,7 +352,27 @@ width: 10px;
 
 <br>
   <h1 class="heading adv_h">Наши преимущества</h1>
-  <div class="row advs">
+  <div class="container-fluid advs">
+    <div class="row">
+      <div class="col-lg-4 adv">
+
+      </div>
+      <div class="col-lg-4 adv">
+
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-lg-4 adv">
+
+      </div>
+      <div class="col-lg-4 adv">
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row advs">
     <div class="col-md-4 adv">
       <h2>Приемущство1</h2>
     </div>
@@ -305,10 +386,10 @@ width: 10px;
       <h2>Приемущство4</h2>
     </div>
 
-  </div>
+  </div> -->
 
 
-<div class="pph">
+<!-- <div class="pph">
   <h1>Портфолио выполненных работ</h1>
   <p>Предлагаем ознакомиться с фотографиями работ квартир, электромонтажная работа которых <br>выполнена нашей компанией.</p>
   <div style="display: flex;">
@@ -327,32 +408,56 @@ width: 10px;
       </div>
     </div>
 
-    <div class="list_pph">
-      <a href="javascript:pph1()">
-      <div class="place" onclick="pph1()">
-        <img src="img/places/ph21.jpg" id="p1" width="150px" height="80px" alt="">
-        <p>Электрика первого <br>этажа коттеджа в Радужном</p>
-      </div>
-      </a>
-      <a href="javascript:pph2()">
-      <div class="place">
-        <img src="img/places/ph31.jpg" id="p2" width="145px" height="80px" alt="">
-        <p>Электрика в подвале <br>коттеджа в Радужном.</p>
-      </div>
-      </a>
-      <a href="javascript:pph3()">
-      <div class="place">
-        <img src="img/places/ph41.jpg" id="p3" width="145px" height="80px" alt="">
-        <p>Трешка в европейских <br>улочках. <br>Сделано за четыре дня.</p>
-      </div>
-      </a>
-    </div>
-
   </div>
 
-  </div>
-<button type="button" class="left2" onclick="left2()" id="arrow3" name="button"><</button>
-<button type="button" class="right2" onclick="right2()" id="arrow4" name="button">></button>
+  </div> -->
+  <h1 class="heading">Портфолио выполненных работ</h1>
+  <p class="i">Предлагаем ознакомиться с фотографиями работ квартир, электромонтажная работа которых <br>выполнена нашей компанией.</p>
+      <div class="carousel slide pph1" id="carouselControls_pph1" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="img/places/ph21.jpg" id="pph1" alt="">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="img/places/ph22.jpg" id="pph2" alt="">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="img/places/ph23.jpg" id="pph3" alt="">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="img/places/ph24.jpg" id="pph4" alt="">
+          </div>
+        </div>
+        <a class="carousel-control-prev" role="button" href="#carouselControls_pph1" data-bs-slide="prev">
+           <span class="carousel-control-prev-icon"></span>
+         </a>
+        <a class="carousel-control-next" role="button" href="#carouselControls_pph1" data-bs-slide="next">
+           <span class="carousel-control-next-icon"></span>
+         </a>
+      </div>
+
+      <div class="list_pph">
+        <a href="javascript:pph1()">
+        <div class="place noTop" onclick="pph1()">
+          <img src="img/places/ph21.jpg" id="p1" width="150px" height="80px" alt="">
+          <p>Электрика первого <br>этажа коттеджа в Радужном</p>
+        </div>
+        </a>
+        <a href="javascript:pph2()">
+        <div class="place">
+          <img src="img/places/ph31.jpg" id="p2" width="145px" height="80px" alt="">
+          <p>Электрика в подвале <br>коттеджа в Радужном.</p>
+        </div>
+        </a>
+        <a href="javascript:pph3()">
+        <div class="place">
+          <img src="img/places/ph41.jpg" id="p3" width="145px" height="80px" alt="">
+          <p>Трешка в европейских <br>улочках. <br>Сделано за четыре дня.</p>
+        </div>
+        </a>
+      </div>
+<!-- <button type="button" class="left2" onclick="left2()" id="arrow3" name="button"><</button>
+<button type="button" class="right2" onclick="right2()" id="arrow4" name="button">></button> -->
 
 <!-- <div class="workers">
   <h1>Ремонт выполняется специализированными бригадами</h1>
@@ -370,46 +475,50 @@ width: 10px;
 <div class="worker2"></div>
 </div> -->
 
+<div class="container-fluid adv2">
+  <div class="row">
+    <h1>Преимущества работы с генеральным подрядчиком</h1>
+    <div class="col-lg-4 mt-4">
+      <h2>1. — Ответственность</h2>
+      <p>
+      Вы получите гарантии и ответственность за ВСЕ<br> выполненные
+      в процессе евроремонта работы <br>в одном лице и сможете избежать
+      рисков,<br>
+      связанных со скрытыми техническими дефектами.<br>
+      </p>
+    </div>
+    <div class="col-lg-4 mt-4">
+      <h2>2. — Управление</h2>
+      <p>
+        Мы эффективно управляет ВСЕМ производственным<br>
+        процессом, учитываем все влияющие друг на друга<br>
+        нюансы проведения различных работ <br>- это положительно
+        влияет на качество и сроки.<br>
 
-<div class="row adv2">
-  <h1>Преимущества работы с генеральным подрядчиком</h1>
-  <div class="col-md-4 mt-4">
-    <h2>1. — Ответственность</h2>
-    <p>
-    Вы получите гарантии и ответственность за ВСЕ<br> выполненные
-    в процессе евроремонта работы <br>в одном лице и сможете избежать
-    рисков,<br>
-    связанных со скрытыми техническими дефектами.<br>
-    </p>
-  </div>
-  <div class="col-md-4 mt-4">
-    <h2>2. — Управление</h2>
-    <p>
-      Мы эффективно управляет ВСЕМ производственным<br>
-      процессом, учитываем все влияющие друг на друга<br>
-      нюансы проведения различных работ <br>- это положительно
-      влияет на качество и сроки.<br>
-
-    </p>
-  </div>
-  <div class="col-md-4 mt-4">
-    <h2>3. — Обратная связь</h2>
-    <p>
-По всем вопросам Вас будет консультировать<br>
-ответственный руководитель проекта.
-</p>
-  </div>
-  <div class="col-md-4 mt-4">
-    <h2>4. — Полная картина</h2>
-    <p>
-Как генеральный подрядчик мы имеем глобальное<br>
-представление о предстоящих и текущих процессах,<br>
-этапах отделки, и конечном результате.<br>
-У исполнителя конкретных<br>
-работ такого понимания нет.
-</p>
-  </div>
+      </p>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-4 mt-4">
+      <h2>3. — Обратная связь</h2>
+      <p>
+  По всем вопросам Вас будет консультировать<br>
+  ответственный руководитель проекта.
+  </p>
+    </div>
+    <div class="col-lg-4 mt-4">
+      <h2>4. — Полная картина</h2>
+      <p>
+  Как генеральный подрядчик мы имеем глобальное<br>
+  представление о предстоящих и текущих процессах,<br>
+  этапах отделки, и конечном результате.<br>
+  У исполнителя конкретных<br>
+  работ такого понимания нет.
+  </p>
+    </div>
 </div>
+
+
 
 <!-- <div class="adv2">
 
@@ -430,8 +539,8 @@ width: 10px;
   </div>
 </div> -->
 
-<div class="form2"><br>
-  <h1>Заявка на расчет стоимости ремонта</h1><br>
+<div class="form2" id="form2"><br>
+  <h1>Оставить заявку</h1><br>
   <form class="" action="form.php" method="post">
     <input type="text" class="input" name="name" placeholder="Имя" required><br><br>
     <input type="tel" class="input input2" name="tel" placeholder="Номер телефона" required><br><br>
