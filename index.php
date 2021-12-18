@@ -18,34 +18,16 @@
         min-height: 100%;
     }
     .content{
-      position: absolute;
+      position: relative;
+
     }
     .content h1{
       color: white;
-      margin-top: 190%;
-      margin-left: 80%;
+      position: relative;
+      left: 320px;
+      top: 650px;
       width: 100%;
-      font-size: 55px;
-    }
-    .label{
-      width: 250px;
-      height: 120px;
-      background-color: #a6a6a6;
-      border-radius: 20px;
-      margin-left: 20px;
-      margin-top: -880px;
-      padding-left: 20px;
-      padding-top: 30px;
-    }
-    .menu{
-      width: 250px;
-      height: 450px;
-      background-color: #a6a6a6;
-      border-radius: 20px;
-      margin-left: 20px;
-      padding-left: 20px;
-      margin-top: 300px;
-      padding-top: 15px;
+      font-size: calc(14px + 3vw);
     }
     .menu a, .about a{
       color: #424242;
@@ -54,32 +36,6 @@
     }
     .menu a:hover, .about a:hover{
       color: #0066db;
-    }
-    .contacts{
-      width: 250px;
-      height: 150px;
-      background-color: #a6a6a6;
-      border-radius: 20px;
-      margin-right: -850px;
-      margin-top: -880px;
-      padding-left: 30px;
-      padding-top: 20px;
-      float: right;
-      position: absolute;
-      right: 50px;
-    }
-    .about{
-      width: 250px;
-      height: 450px;
-      background-color: #a6a6a6;
-      border-radius: 20px;
-      margin-right: -850px;
-      padding-left: 20px;
-      margin-top: -450px;
-      padding-top: 15px;
-      float: right;
-      position: absolute;
-      right: 50px;
     }
     .order_bt{
       width: 180px;
@@ -96,6 +52,59 @@
     .order_bt:hover{
       background-color: #0073b5;
     }
+    .label{
+      width: 250px;
+      height: 120px;
+      background-color: #91d7ff;
+      background-image: url(img/label_bg2.png);
+      border-radius: 20px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding-left: 20px;
+      padding-top: 30px;
+    }
+    .menu{
+      width: 250px;
+      height: 480px;
+      background-color: #91d7ff;
+      background-image: url(img/label_bg2.png);
+      border-radius: 20px;
+      padding-top: 15px;
+      padding-left: 20px;
+      margin-left: 20px;
+      margin-top: 10%;
+    }
+    .contacts{
+      width: 250px;
+      height: 150px;
+      background-color: #91d7ff;
+      background-image: url(img/label_bg2.png);
+      border-radius: 20px;
+      padding-left: 30px;
+      padding-top: 20px;
+      float: right;
+      /* margin-top: -790px;
+      margin-right: 20px; */
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .about{
+      width: 250px;
+      height: 450px;
+      background-color: #91d7ff;
+      background-image: url(img/label_bg2.png);
+      border-radius: 20px;
+      padding-left: 20px;
+      padding-top: 15px;
+      float: right;
+      margin-right: 20px;
+      margin-top: -450px;
+    }
+    .leftBlocks{
+      margin-top: auto;
+    }
 </style>
   </head>
   <body>
@@ -104,15 +113,15 @@
     </video>
     <div class="content">
         <h1>Качественный<br> электромонтаж</h1>
-        <div class="label">
-          <img src="img/label2.png" alt="">
-        </div>
-        <div class="menu">
-          <a href="index.php">Главная</a><br><br>
-          <a href="flats.php">Электромонтаж квартир</a><br><br>
-          <a href="houses.php">Электромонтаж домов</a><br><br>
-          <a href="rooms.php">Электромонтаж помещений</a><br><br>
-        </div>
+          <div class="label">
+            <img src="img/label2.png" alt="">
+          </div>
+          <div class="menu">
+            <a href="index.php">Главная</a><br><br>
+            <a href="flats.php">Электромонтаж квартир</a><br><br>
+            <a href="houses.php">Электромонтаж домов</a><br><br>
+            <a href="rooms.php">Электромонтаж помещений</a><br><br>
+          </div>
 
         <div class="contacts">
           <h4>(8332) 45-45-24</h4>
