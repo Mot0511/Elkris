@@ -25,7 +25,7 @@
       color: white;
       position: relative;
       left: 320px;
-      top: 650px;
+      top: calc(580px + 1.5vw);
       width: 100%;
       font-size: calc(1px + 3vw);
     }
@@ -54,8 +54,8 @@
       background-color: #0073b5;
     }
     .label{
-      width: 250px;
-      height: 120px;
+      width: calc(190px + 3vw);
+      height: calc(60px + 3vw);
       background-color: #91d7ff;
       background-image: url(img/label_bg2.png);
       border-radius: 20px;
@@ -66,8 +66,8 @@
       padding-top: 30px;
     }
     .menu{
-      width: 250px;
-      height: 480px;
+      width: calc(190px + 3vw);
+      height: calc(380px + 3vw);
       background-color: #91d7ff;
       background-image: url(img/label_bg2.png);
       border-radius: 20px;
@@ -77,8 +77,8 @@
       text-align: center;
     }
     .contacts{
-      width: 250px;
-      height: 150px;
+      width: calc(190px + 3vw);
+      height: calc(110px + 3vw);
       background-color: #91d7ff;
       background-image: url(img/label_bg2.png);
       border-radius: 20px;
@@ -92,8 +92,8 @@
       right: 20px;
     }
     .about{
-      width: 250px;
-      height: 450px;
+      width: calc(190px + 3vw);
+      height: calc(380px + 3vw);
       background-color: #91d7ff;
       background-image: url(img/label_bg2.png);
       border-radius: 20px;
@@ -107,7 +107,7 @@
       margin-top: auto;
     }
     .infoBlock{
-      width: 50%;
+      width: calc(40% + 3vw);
       height: 600px;
       background-color: white;
       border-radius: 20px;
@@ -115,7 +115,35 @@
       left: 300px;
       top: -600px;
       transition: top 0.5s;
-
+    }
+    @media (max-width: 1200px) {
+      .content h1{
+        position: absolute;
+        left: 30px;
+        font-size: 100px;
+      }
+      .label{
+        width: 600px;
+        height: 300px;
+        padding-top: 60px;
+      }
+      .label img{
+        width: 100%;
+        height: auto;
+      }
+      .menu{
+        width: 600px;
+        height: 1000px;
+        position: absolute;
+        top: 250px;
+        padding-top: 30px;
+      }
+      .menu a, .about a{
+        font-size: 60px;
+      }
+      .about{
+        top: 700px;
+      }
     }
 </style>
 <!-- <script type="text/javascript" src="script.js"></script> -->
