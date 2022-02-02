@@ -1,0 +1,733 @@
+<?php
+function ValidateEmail($email)
+{
+   $pattern = '/^([0-9a-z]([-.\w]*[0-9a-z])*@(([0-9a-z])+([-\w]*[0-9a-z])*\.)+[a-z]{2,6})$/i';
+   return preg_match($pattern, $email);
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['formid']) && $_POST['formid'] == 'zakaz')
+{
+   $mailto = 'redstoun.mod@yandex.ru';
+   $mailfrom = isset($_POST['email']) ? $_POST['email'] : $mailto;
+   $subject = 'Заказ электромонтажной работы';
+   $message = 'Заказ электромонтажной работы';
+   $success_url = './true.html';
+   $error_url = './false.html';
+   $eol = "\n";
+   $error = '';
+   $internalfields = array ("submit", "reset", "send", "filesize", "formid", "captcha_code", "recaptcha_challenge_field", "recaptcha_response_field", "g-recaptcha-response");
+   $boundary = md5(uniqid(time()));
+   $header  = 'From: '.$mailfrom.$eol;
+   $header .= 'Reply-To: '.$mailfrom.$eol;
+   $header .= 'MIME-Version: 1.0'.$eol;
+   $header .= 'Content-Type: multipart/mixed; boundary="'.$boundary.'"'.$eol;
+   $header .= 'X-Mailer: PHP v'.phpversion().$eol;
+
+   try
+   {
+      if (!ValidateEmail($mailfrom))
+      {
+         $error .= "The specified email address (" . $mailfrom . ") is invalid!\n<br>";
+         throw new Exception($error);
+      }
+      $message .= $eol;
+      foreach ($_POST as $key => $value)
+      {
+         if (!in_array(strtolower($key), $internalfields))
+         {
+            if (!is_array($value))
+            {
+               $message .= ucwords(str_replace("_", " ", $key)) . " : " . $value . $eol;
+            }
+            else
+            {
+               $message .= ucwords(str_replace("_", " ", $key)) . " : " . implode(",", $value) . $eol;
+            }
+         }
+      }
+      $body  = 'This is a multi-part message in MIME format.'.$eol.$eol;
+      $body .= '--'.$boundary.$eol;
+      $body .= 'Content-Type: text/plain; charset=UTF-8'.$eol;
+      $body .= 'Content-Transfer-Encoding: 8bit'.$eol;
+      $body .= $eol.stripslashes($message).$eol;
+      if (!empty($_FILES))
+      {
+         foreach ($_FILES as $key => $value)
+         {
+             if ($_FILES[$key]['error'] == 0)
+             {
+                $body .= '--'.$boundary.$eol;
+                $body .= 'Content-Type: '.$_FILES[$key]['type'].'; name='.$_FILES[$key]['name'].$eol;
+                $body .= 'Content-Transfer-Encoding: base64'.$eol;
+                $body .= 'Content-Disposition: attachment; filename='.$_FILES[$key]['name'].$eol;
+                $body .= $eol.chunk_split(base64_encode(file_get_contents($_FILES[$key]['tmp_name']))).$eol;
+             }
+         }
+      }
+      $body .= '--'.$boundary.'--'.$eol;
+      if ($mailto != '')
+      {
+         mail($mailto, $subject, $body, $header);
+      }
+      header('Location: '.$success_url);
+   }
+   catch (Exception $e)
+   {
+      $errorcode = file_get_contents($error_url);
+      $replace = "##error##";
+      $errorcode = str_replace($replace, $e->getMessage(), $errorcode);
+      echo $errorcode;
+   }
+   exit;
+}
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Выполнение электромонтажных работ</title>
+<meta name="keywords" content="+с электрикой,
+2 электрика,
+вызвать электрика,
+вызов электрика,
+инженер электрик,
+нужен электрик,
+сайт электрика,
+услуги электрика,
+электрик,
+электрик +на дом,
+электрик 1,
+электрика +в квартире,
+электриков 3,
++с электрикой,
+2 электрика,
+вызвать электрика,
+вызов электрика,
+инженер электрик,
+нужен электрик,
+поиск электромонтажа,
+сайт электрика,
+сайт электромонтаж,
+услуги электрика,
+электрик,
+электрик +на дом,
+электрик 1,
+электрика +в квартире,
+электриков 3,
+электромонтаж,
+электромонтаж +в доме,
+электромонтаж киров,
+электромонтаж объектов,
+электромонтаж поиск объектов,
+электромонтаж цены,
+электромонтаж частного дома,">
+<meta name="author" content="суворов матвей">
+<meta name="revisit-after" content="7 days">
+<link href="проект.css" rel="stylesheet">
+<link href="index.css" rel="stylesheet">
+<style>
+@media (max-width: 1000px) {
+	.h1{font-size: 40px}
+	.form{width: 300px; height: 600}
+	.text1 {font-size: 20}
+	.text2 {font-size: 20}
+	.text3 {font-size: 20}
+	.text4 {font-size: 20}
+
+}
+
+html, body, #container
+{
+   width: 100%;
+   height: 100%;
+}
+body
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
+#wb_Image1
+{
+   vertical-align: top;
+}
+#Image1
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Shape1
+{
+   transform: rotate(0deg);
+   transform-origin: 50% 50%;
+}
+#Shape1
+{
+   border-width: 0;
+   vertical-align: top;
+}
+#wb_Text1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text1 div
+{
+   text-align: center;
+}
+#wb_Image2
+{
+   vertical-align: top;
+}
+#Image2
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image3
+{
+   vertical-align: top;
+}
+#Image3
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image5
+{
+   vertical-align: top;
+}
+#Image5
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image4
+{
+   vertical-align: top;
+}
+#Image4
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text2 div
+{
+   text-align: center;
+}
+#wb_Text3 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text3 div
+{
+   text-align: center;
+}
+#wb_Text4 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text4 div
+{
+   text-align: center;
+}
+#wb_Text5 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text5 div
+{
+   text-align: center;
+}
+#wb_Text6 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text6 div
+{
+   text-align: center;
+}
+#Layer1
+{
+   background-color: #808080;
+   background-image: none;
+}
+#wb_Text8 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text8 div
+{
+   text-align: left;
+}
+#wb_Text9 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text9 div
+{
+   text-align: left;
+}
+#wb_Text10 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text10 div
+{
+   text-align: center;
+}
+#wb_Image6
+{
+   vertical-align: top;
+}
+#Image6
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image7
+{
+   vertical-align: top;
+}
+#Image7
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image8
+{
+   vertical-align: top;
+}
+#Image8
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image9
+{
+   vertical-align: top;
+}
+#Image9
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image10
+{
+   vertical-align: top;
+}
+#Image10
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image11
+{
+   vertical-align: top;
+}
+#Image11
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image12
+{
+   vertical-align: top;
+}
+#Image12
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image13
+{
+   vertical-align: top;
+}
+#Image13
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image14
+{
+   vertical-align: top;
+}
+#Image14
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image15
+{
+   vertical-align: top;
+}
+#Image15
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text11 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text11 div
+{
+   text-align: left;
+}
+#wb_zakaz
+{
+   background-color: #F5F5F5;
+   background-image: none;
+   border: 3px solid #CCCCCC;
+   border-radius: 10px;
+}
+#wb_Text7 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text7 div
+{
+   text-align: center;
+}
+#Button3
+{
+   border: 1px solid #2E6DA4;
+   border-radius: 4px;
+   background-color: #3370B7;
+   background-image: none;
+   color: #FFFFFF;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 19px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#Editbox1
+{
+   border: 1px solid #CCCCCC;
+   border-radius: 4px;
+   background-color: #3370B7;
+   background-image: none;
+   color :#F5F5F5;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 39px;
+   padding: 4px 4px 4px 4px;
+   margin: 0;
+   text-align: left;
+}
+#Editbox1:focus
+{
+   border-color: #66AFE9;
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   outline: 0;
+}
+#Editbox2
+{
+   border: 1px solid #CCCCCC;
+   border-radius: 4px;
+   background-color: #3370B7;
+   background-image: none;
+   color :#F5F5F5;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 39px;
+   padding: 4px 4px 4px 4px;
+   margin: 0;
+   text-align: left;
+}
+#Editbox2:focus
+{
+   border-color: #66AFE9;
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   outline: 0;
+}
+#wb_Image16
+{
+   vertical-align: top;
+}
+#Image16
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image17
+{
+   vertical-align: top;
+}
+#Image17
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Image19
+{
+   vertical-align: top;
+}
+#Image19
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text12 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text12 div
+{
+   text-align: left;
+}
+#wb_Image18
+{
+   vertical-align: top;
+}
+#Image18
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<div id="wb_Image1" style="position:absolute;left:1px;top:0px;width:1374px;height:735px;z-index:8;">
+<img src="images/5e13251e16b8a.jpg" id="Image1" alt=""></div>
+<div id="wb_Shape1" style="position:absolute;left:3px;top:0px;width:1374px;height:735px;opacity:0.60;z-index:9;">
+<img src="images/img0001.png" id="Shape1" alt="" style="width:1374px;height:735px;"></div>
+<div id="wb_Text1" style="position:absolute;left:246px;top:36px;width:885px;height:119px;text-align:center;z-index:10;">
+<span style="color:#F5F5F5;font-family:Arial;font-size:53px;"><strong class="h1">Выполнение электромонтажных работ</strong></span></div>
+<div id="wb_Image2" style="position:absolute;left:284px;top:1160px;width:347px;height:201px;z-index:11;">
+<img src="images/kisspng%2dskyline%2dtrampoline%2dpark%2dtimetable%2d5c08fbed0f17b1.7633546915440926530618.jpg" id="Image2" alt=""></div>
+<div id="wb_Image3" style="position:absolute;left:814px;top:1154px;width:213px;height:213px;z-index:12;">
+<img src="images/UV.png" id="Image3" alt=""></div>
+<div id="wb_Image5" style="position:absolute;left:788px;top:786px;width:249px;height:249px;z-index:13;">
+<img src="images/kisspng%2dcomputer%2dicons%2dprice%2dorganization%2dcomputer%2dsoftwar%2dwallets%2d5ab582894f2424.3307233715218448733242.jpg" id="Image5" alt=""></div>
+<div id="wb_Image4" style="position:absolute;left:338px;top:786px;width:238px;height:238px;z-index:14;">
+<img src="images/&#1057;&#1058;&#1088;&#1086;&#1075;&#1086;&#1077;%20&#1089;&#1086;&#1073;&#1083;&#1102;&#1076;&#1077;&#1085;&#1080;&#1077;%20&#1089;&#1088;&#1086;&#1082;&#1086;&#1074;.png" id="Image4" alt=""></div>
+<div id="wb_Text2" style="position:absolute;left:338px;top:1030px;width:250px;height:54px;text-align:center;z-index:15;">
+<h3 class="text1">Короткие сроки выполнения заказа</h3></div>
+<div id="wb_Text3" style="position:absolute;left:799px;top:1035px;width:242px;height:27px;text-align:center;z-index:16;">
+<h3 class="text2"> Приемлимые цены</h3></div>
+<div id="wb_Text4" style="position:absolute;left:338px;top:1367px;width:250px;height:54px;text-align:center;z-index:17;">
+<h3 class="text3">Доброжелательные сотрудники</h3></div>
+<div id="wb_Text5" style="position:absolute;left:795px;top:1367px;width:250px;height:54px;text-align:center;z-index:18;">
+<h3 class="text4">Качественное выполнение работ</h3></div>
+<div id="wb_Text6" style="position:absolute;left:541px;top:752px;width:295px;height:30px;text-align:center;z-index:19;">
+<h2>Наши приемущества</h2></div>
+<div id="Layer1" style="position:absolute;text-align:left;left:0px;top:3395px;width:1374px;height:93px;z-index:20;">
+<div id="wb_Text8" style="position:absolute;left:8px;top:9px;width:182px;height:54px;z-index:0;">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Дизайн и работа сайта: Суворов Матвей Васильевич</span></div>
+<div id="wb_Text9" style="position:absolute;left:206px;top:9px;width:245px;height:36px;z-index:1;">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Компания по электромонтажным работам: Elkris (тел. 45-45-24)</span></div>
+<div id="wb_Image18" style="position:absolute;left:1323px;top:45px;width:39px;height:39px;z-index:2;">
+<a href="https://vk.com/public180826580"><img src="images/kisspng%2dcomputer%2dicons%2dweb%2dbrowser%2dvk%2dclip%2dart%2dvk%2dlogo%2d5b373587f2d9e6.5967404415303448399947.jpg" id="Image18" alt=""></a></div>
+</div>
+<div id="wb_Text10" style="position:absolute;left:565px;top:1518px;width:251px;height:30px;text-align:center;z-index:21;">
+<h2>Готовые объекты </h2></div>
+<div id="wb_Image6" style="position:absolute;left:923px;top:1575px;width:400px;height:300px;z-index:22;">
+<img src="images/14.jpg" id="Image6" alt=""></div>
+<div id="wb_Image7" style="position:absolute;left:923px;top:1922px;width:400px;height:327px;z-index:23;">
+<img src="images/11.jpg" id="Image7" alt=""></div>
+<div id="wb_Image8" style="position:absolute;left:509px;top:1575px;width:358px;height:478px;z-index:24;">
+<img src="images/12.jpg" id="Image8" alt=""></div>
+<div id="wb_Image9" style="position:absolute;left:27px;top:1575px;width:436px;height:327px;z-index:25;">
+<img src="images/13.jpg" id="Image9" alt=""></div>
+<div id="wb_Image10" style="position:absolute;left:923px;top:2854px;width:387px;height:424px;z-index:26;">
+<img src="images/26.jpg" id="Image10" alt=""></div>
+<div id="wb_Image11" style="position:absolute;left:508px;top:2626px;width:358px;height:422px;z-index:27;">
+<img src="images/21.jpg" id="Image11" alt=""></div>
+<div id="wb_Image12" style="position:absolute;left:27px;top:2566px;width:435px;height:482px;z-index:28;">
+<img src="images/22.jpg" id="Image12" alt=""></div>
+<div id="wb_Image13" style="position:absolute;left:923px;top:2293px;width:387px;height:517px;z-index:29;">
+<img src="images/23.jpg" id="Image13" alt=""></div>
+<div id="wb_Image14" style="position:absolute;left:509px;top:2105px;width:357px;height:477px;z-index:30;">
+<img src="images/24.jpg" id="Image14" alt=""></div>
+<div id="wb_Image15" style="position:absolute;left:27px;top:1939px;width:435px;height:581px;z-index:31;">
+<img src="images/25.jpg" id="Image15" alt=""></div>
+<div id="wb_Text11" style="position:absolute;left:507px;top:192px;width:363px;height:39px;z-index:32;">
+<span style="color:#F5F5F5;font-family:Arial;font-size:35px;"><strong>Тел. 8 (8332)45-45-24</strong></span></div>
+<div id="wb_zakaz" style="position:absolute;left:814px;top:272px;width:256px;height:294px;z-index:33;">
+<form name="Form1" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" accept-charset="UTF-8" target="_blank" id="zakaz" class="form">
+<input type="hidden" name="formid" value="zakaz">
+<input type="submit" id="Button3" name="sub" value="Отправить заказ" style="position:absolute;left:12px;top:236px;width:230px;height:35px;z-index:3;">
+<div id="wb_Text7" style="position:absolute;left:5px;top:9px;width:248px;height:72px;text-align:center;z-index:4;">
+<span style="color:#000000;font-family:Arial;font-size:21px;"><strong>Закажите выполнение электромонтажной работы</strong></span></div>
+<input type="text" id="Editbox1" style="position:absolute;left:14px;top:89px;width:220px;height:39px;z-index:5;" name="Имя заказчика" value="Ваше имя" autofocus spellcheck="true">
+<input type="text" id="Editbox2" style="position:absolute;left:14px;top:151px;width:218px;height:39px;z-index:6;" name="Телефон заказчика" value="Ваш номер телефона" spellcheck="true">
+</form>
+</div>
+<div id="wb_Image16" style="position:absolute;left:309px;top:3068px;width:224px;height:305px;z-index:34;">
+<img src="images/61.jpg" id="Image16" alt=""></div>
+<div id="wb_Image17" style="position:absolute;left:32px;top:3059px;width:252px;height:314px;z-index:35;">
+<img src="images/52.jpg" id="Image17" alt=""></div>
+<div id="wb_Image19" style="position:absolute;left:558px;top:3068px;width:336px;height:305px;z-index:36;">
+<img src="images/92.jpg" id="Image19" alt=""></div>
+<div id="wb_Text12" style="position:absolute;left:211px;top:284px;width:493px;height:101px;z-index:37;">
+<span style="color:#F5F5F5;font-family:Arial;font-size:27px;"><strong><u>Элькрис -<br></u></strong></span><span style="color:#F5F5F5;font-family:Arial;font-size:21px;"><strong>компания, которая сделает вам качественное выполнение электромонтажной работы за приемлимую цену</strong></span></div>
+</body>
+</html>
